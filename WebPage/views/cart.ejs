@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Košarica </title>
+        <link rel="stylesheet" href="/styles/cart-styles.css">
+    </head>
+    <body>
+        <div class = "navbar">
+            <img class = "logo" src = "/images/logo.png" alt="logo">
+            <div class = "header">
+                <p class = "headertext">Košarica</p>
+            </div>
+        </div>
+        <div class = "navbar2">
+            <div class = "header2">
+                <p class = "headertext2">Košarica</p>
+            </div>
+        </div>
+        <div class = "cart">
+            <% for (var product of cart) { %>
+                <div class = "itembox">
+                    <p class = "name"> <%= product.name %> </p>
+                    <div class = "subbox">
+                        <form action = "/cart/add/<%= product.name %>" method = "post" ><button class = "minusbutton" type = "submit">+</button></form>
+                        <p class = "amount"> <%= product.quantity %> </p>
+                        <form action = "/cart/remove/<%= product.name %>" method = "post"><button class = "plusbutton" type = "submit">-</button></form>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </body>
+</html>

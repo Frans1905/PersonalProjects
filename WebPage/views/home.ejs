@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Ferton </title>
+        <link rel = "stylesheet" href = "/styles/index-styles.css">
+    </head>
+    <body class = "page_body"> 
+
+    <%  let count = 0;
+        for (var q of cart) {
+            count = count + q.quantity;
+        } %>
+
+        <div class = "navbar">
+            <img class = "logo" src = "/images/logo.png" alt="logo">
+            <span class = "curr_category"><%= category %></span>
+            <div class ="cartbox" id = "insert1">
+                <% if (count > 0) { %>
+                        <p class = "counter" id = "cartcounter1"> <%= count %> </p>
+                <% } %>
+                <a class = "cartlink1" href = "../cart"><img class ="cart" id = "cart1" src = "/images/cart.png"></a>
+                <img class ="magnifier" src = "/images/magnifier.png">
+            </div>
+        </div>
+
+        <div class = "navbar2">
+            <span class = "curr_category2"><%= category %></span>
+            <div class ="cartbox2" id = "insert2">
+                <% if (count > 0) { %>
+                    <p class = "counter" id = "cartcounter2"> <%= count %> </p>
+                <% } %>
+                <a class = "cartlink2" href = "../cart"><img class ="cart" id = "cart2" src = "/images/cart.png"></a>
+                <img class ="magnifier" src = "/images/magnifier.png">
+            </div>
+        </div>
+
+        <div class="centerpage2">
+            <div class = "welcomewindow2">
+                <p class="welcometext2">
+                    FERTON - glazba za vaše uši
+                </p>
+            </div>
+        </div>
+
+        <div class = "contentpage">
+            <div class = "sidebar">
+                <div class = categoryselect>
+                    <% for (let cat of categories)  {%>
+                        <form action = "getProducts/<%= cat.name %>">
+                            <button type = "submit" class = "midcat">
+                                <%= cat['name'] %>
+                            </button>
+                        </form>
+                    <% } %>
+                </div>
+                <div class = "contactbox">
+                    <p class = "contactp">
+                        Kontakt
+                    </p>
+                    <p class = "newsp">
+                        Newsletter
+                    </p>
+                    <p class = "subp">
+                        Pretplati se
+                    </p>
+                </div>
+            </div>
+            <div class = "centerpage">
+                <div class = "welcomewindow">
+                    <p class="welcometext">
+                        FERTON - glazba za vaše uši
+                    </p>
+                </div>
+                <div class = "itempage" id = "itempage1">
+                    <% for (let product of products) { %>
+                        <div class = "itemdiv">
+                        <%  
+                            for (var product2 of cart) { 
+                                if (product2.name === product.name) { %>
+                                    <p class = "counter"> <%= product2.quantity %> </p>
+                                <% } %>
+                            <% } %>
+                            <img class = "itempic" src = <%= product.image %>>
+                            <p class = "itemname"> <%= product["name"] %> </p>
+
+                            <form action = "/add/<%= product.name %>" method = "post">
+                                <button type = "submit" class = "add"><img class = "addpic" src = "/images/cart.png"></button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+
+    </body>     
+    
+    <script src = "/scripts/localscript.js"></script>
+</html>
